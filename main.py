@@ -91,8 +91,9 @@ class InputConnect:
     def print_vacancies():
         file_name = input('Введите название файла: ')
         vacancy = input('Введите название профессии: ')
-        vacancies = DataSet(file_name).vacancies_objects
+        choice = input('Вакансии или статистика: ')
 
+        vacancies = DataSet(file_name).vacancies_objects
         statistic = InputConnect.get_statistic(vacancies, vacancy)
 
         print(f"Динамика уровня зарплат по годам: {statistic[0]}")
@@ -102,8 +103,11 @@ class InputConnect:
         print(f"Уровень зарплат по городам (в порядке убывания): {statistic[4]}")
         print(f"Доля вакансий по городам (в порядке убывания): {statistic[5]}")
 
-        Report(vacancy).generate_xlsx(statistic)
-        Graph(vacancy).draw_graphs(statistic)
+        if choice.lower() == 'вакансии':
+            Report(vacancy).generate_xlsx(statistic)
+        else:
+            Graph(vacancy).draw_graphs(statistic)
+            ReportPdf(vacancy).create_pdf(statistic)
 
     @staticmethod
     def get_statistic(vacancies, vacancy):
