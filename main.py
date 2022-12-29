@@ -43,7 +43,7 @@ class DataSet:
             try:
                 list_naming = next(reader)
             except StopIteration:
-                print("Пустой файл")
+                print("Пустой файличек")
                 quit()
 
             reader = [row for row in reader if len(row) == len(list_naming) and '' not in row]
