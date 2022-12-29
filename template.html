@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+<!--    <link rel="stylesheet" href="style.css">-->
+    <link rel="stylesheet" href="{{ path }}/style.css">
+    <style>
+        .image{
+    width: 100%;
+    height: auto;
+}
+
+.title {
+    text-align: center;
+    font-weight: bold;
+}
+
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: center;
+  background: transparent;
+  border-collapse: collapse;
+  font-weight: 400;
+}
+
+table, th, td {
+  border: 1px solid black;
+  text-align: center;
+}
+
+.thead > tr > th {
+    font-weight: bold;
+}
+
+th {
+    padding: 5px;
+}
+
+.large {
+    width: 100%;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.small {
+    width: 49%;
+    display: inline-block;
+}
+
+.small:nth-child(1) {
+    margin-right: 5px;
+}
+
+table {
+    width: 100%;
+}
+    </style>
+</head>
+<body>
+
+<h1 class="title">Аналитика по зарплатам и городам для профессии {{ vacancy }}</h1>
+
+<!--<img class="image" src="graph.png" alt="">-->
+<img class="image" src="{{ path }}/graph.png" alt="">
+
+<h2 class="title">Статистика по годам</h2>
+<table class="large">
+    <thead class="thead">
+        <tr>
+            <th>Год</th>
+            <th>Средняя зарплата</th>
+            <th>Средняя зарплата - {{ vacancy }}</th>
+            <th>Количество вакансий </th>
+            <th>Количество вакансий - {{ vacancy }}</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for row in rows1 %}
+    <tr>
+        <th>{{ row.year }}</th>
+        <th>{{ row.average }}</th>
+        <th>{{ row.average_v }}</th>
+        <th>{{ row.count }}</th>
+        <th>{{ row.count_v }}</th>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h2 class="title">Статистика по городам</h2>
+
+<div class="wrapper">
+    <div class="small">
+        <table>
+            <thead class="thead">
+                <tr>
+                    <th>Город</th>
+                    <th>Уровень зарплат</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for row in rows2 %}
+            <tr>
+                <th>{{ row.city }}</th>
+                <th>{{ row.salary }}</th>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="small">
+        <table>
+            <thead class="thead">
+                <tr>
+                    <th>Город</th>
+                    <th>Доля вакансий</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for row in rows3 %}
+            <tr>
+                <th>{{ row.city }}</th>
+                <th>{{ row.fraction }}</th>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
