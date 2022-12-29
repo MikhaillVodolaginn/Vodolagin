@@ -103,7 +103,7 @@ class InputConnect:
         print(f"Уровень зарплат по городам (в порядке убывания): {statistic[4]}")
         print(f"Доля вакансий по городам (в порядке убывания): {statistic[5]}")
 
-        if choice.lower() == 'статистика':
+        if choice.lower() == 'вакансии':
             Report(vacancy).generate_xlsx(statistic)
         else:
             Graph(vacancy).draw_graphs(statistic)
